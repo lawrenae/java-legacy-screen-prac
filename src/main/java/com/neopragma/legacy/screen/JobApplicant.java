@@ -151,6 +151,10 @@ public class JobApplicant {
         return state;
     }
 
+    String getZipCode() {
+        return zipCode;
+    }
+
     private void save() {
         //TODO save information to a database
         System.out.println("Saving to database: " + formatLastNameFirst());

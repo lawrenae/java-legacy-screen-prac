@@ -172,5 +172,6 @@ public class JobApplicantTest {
 		jobApplicant.setZipCode("75001");
 		assertEquals("Addison", jobApplicant.getCity());
 		assertEquals("TX", jobApplicant.getState());
+		assertEquals("75001", jobApplicant.getZipCode());
 	}
 }
