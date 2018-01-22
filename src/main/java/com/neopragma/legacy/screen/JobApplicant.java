@@ -26,15 +26,19 @@ public class JobApplicant {
 	private String lastName = null;
 	
 	public void setName(String firstName, String middleName, String lastName) {
-		this.firstName = firstName == null ? "" : firstName;
-		this.middleName = middleName == null ? "" : middleName;
-		this.lastName = lastName == null ? "" : lastName;
+		this.firstName = emptyStringIfNull(firstName);
+		this.middleName = emptyStringIfNull(middleName);
+		this.lastName = emptyStringIfNull(lastName);
 	}
-	
+
+	private String emptyStringIfNull(String string) {
+		return string == null ? "" : string;
+	}
+
 	public void setSpanishName(String primerNombre, String segundoNombre,
 							   String primerApellido, String segundoApellido) {
-		this.firstName = primerNombre == null ? "" : primerNombre;
-		this.middleName = segundoNombre == null ? "" : segundoNombre;
+		this.firstName = emptyStringIfNull(primerNombre);
+		this.middleName = emptyStringIfNull(segundoNombre);
 		if ( primerApellido != null ) {
   		    StringBuilder sb = new StringBuilder(primerApellido);
 		    sb.append(segundoApellido == null ? null : " " + segundoApellido);
