@@ -59,12 +59,12 @@ public class JobApplicant {
         return sb.toString();
     }
 
-    public int validateName() {
+    public boolean validateName() {
         if (firstName.length() > 0 && lastName.length() > 0) {
-            return 0;
-        } else {
-            return 6;
+            return true;
         }
+
+        return false;
     }
 
     private String ssn;

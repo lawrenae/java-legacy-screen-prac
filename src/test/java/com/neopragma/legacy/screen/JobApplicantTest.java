@@ -1,6 +1,8 @@
 package com.neopragma.legacy.screen;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
@@ -32,55 +34,55 @@ public class JobApplicantTest {
 	@Test
 	public void completeNameProvided() {
 		jobApplicant.setName("First", "Middle", "Last");
-		assertEquals(0, jobApplicant.validateName());
+		assertTrue(jobApplicant.validateName());
 	}
 	
 	@Test
 	public void firstAndLastNamesProvided() {
 		jobApplicant.setName("First", null, "Last");
-		assertEquals(0, jobApplicant.validateName());
+		assertTrue(jobApplicant.validateName());
 	}
 	
 	@Test
 	public void missingFirstName() {
 		jobApplicant.setName(null, null, "Last");
-		assertEquals(6, jobApplicant.validateName());
+		assertFalse(jobApplicant.validateName());
 	}
 	
 	@Test
 	public void missingLastName() {
 		jobApplicant.setName("First", null, null);
-		assertEquals(6, jobApplicant.validateName());
+		assertFalse(jobApplicant.validateName());
 	}
 	
 	@Test
 	public void completeSpanishNameProvided() {
 		jobApplicant.setSpanishName("PrimerNombre", "SegundoNombre", "PrimerApellido", "SegundoApellido");
-		assertEquals(0, jobApplicant.validateName());
+		assertTrue(jobApplicant.validateName());
 	}
 	
 	@Test
 	public void spanishNameWithOneFirstNameProvided() {
 		jobApplicant.setSpanishName("PrimerNombre", null, "PrimerApellido", "SegundoApellido");
-		assertEquals(0, jobApplicant.validateName());
+		assertTrue(jobApplicant.validateName());
 	}
 	
 	@Test
 	public void spanishNameWithOneLastNameProvided() {
 		jobApplicant.setSpanishName("PrimerNombre", null, "PrimerApellido", null);
-		assertEquals(0, jobApplicant.validateName());
+		assertTrue(jobApplicant.validateName());
 	}
 	
 	@Test
 	public void spanishNameWithNoFirstNameProvided() {
 		jobApplicant.setSpanishName(null, null, "PrimerApellido", null);
-		assertEquals(6, jobApplicant.validateName());
+		assertFalse(jobApplicant.validateName());
 	}
 	
 	@Test
 	public void spanishNameWithNoLastNameProvided() {
 		jobApplicant.setSpanishName("PrimerNombre", "SegundoNombre", null, null);
-		assertEquals(6, jobApplicant.validateName());
+		assertFalse(jobApplicant.validateName());
 	}
 	
 	@Test
