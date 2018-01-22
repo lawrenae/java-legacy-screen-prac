@@ -115,25 +115,27 @@ public class JobApplicant {
         return sb.toString();
     }
 
-    int validateSsn() {
+    boolean validateSsn() {
         if (!ssn.matches("\\d{9}")) {
-            return 1;
+            return false;
         }
+
         if ("000".equals(ssn.substring(0, 3)) ||
                 "666".equals(ssn.substring(0, 3)) ||
                 "9".equals(ssn.substring(0, 1))) {
-            return 2;
+            return false;
         }
+
         if ("0000".equals(ssn.substring(5))) {
-            return 3;
+            return false;
         }
 
         for (String specialCase : specialCases) {
             if (ssn.equals(specialCase)) {
-                return 4;
+                return false;
             }
         }
-        return 0;
+        return true;
     }
 
     void setZipCode(String zipCode) throws URISyntaxException, IOException {
