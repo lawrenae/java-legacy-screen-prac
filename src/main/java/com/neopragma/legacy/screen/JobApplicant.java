@@ -33,21 +33,19 @@ public class JobApplicant {
 
     public static void main(String[] args) throws URISyntaxException, IOException {
         JobApplicant jobApplicant = new JobApplicant();
-        boolean done = false;
         Scanner scanner = new Scanner(System.in);
-        String firstName = "";
-        String middleName = "";
-        String lastName = "";
-        String ssn = "";
-        String zipCode = "";
-        while (!done) {
+        String firstName;
+        String middleName;
+        String lastName;
+        String ssn;
+        String zipCode;
+        while (true) {
             System.out.println("Please enter info about a job candidate or 'quit' to quit");
             System.out.println("First name?");
             firstName = scanner.nextLine();
             if (firstName.equals("quit")) {
                 scanner.close();
                 System.out.println("Bye-bye!");
-                done = true;
                 break;
             }
             System.out.println("Middle name?");
@@ -107,8 +105,9 @@ public class JobApplicant {
         }
     }
 
-        StringBuilder sb = new StringBuilder(ssn.substring(0, 3));
     String formatSsn() {
+        StringBuilder sb = new StringBuilder(11);
+        sb.append(ssn.substring(0, 3));
         sb.append("-");
         sb.append(ssn.substring(3, 5));
         sb.append("-");
@@ -128,8 +127,9 @@ public class JobApplicant {
         if ("0000".equals(ssn.substring(5))) {
             return 3;
         }
-        for (int i = 0; i < specialCases.length; i++) {
-            if (ssn.equals(specialCases[i])) {
+
+        for (String specialCase : specialCases) {
+            if (ssn.equals(specialCase)) {
                 return 4;
             }
         }
