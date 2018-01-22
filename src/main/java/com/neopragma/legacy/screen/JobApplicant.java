@@ -65,14 +65,14 @@ public class JobApplicant {
         }
     }
 
-    public void setName(String firstName, String middleName, String lastName) {
+    void setName(String firstName, String middleName, String lastName) {
         this.firstName = emptyStringIfNull(firstName);
         this.middleName = emptyStringIfNull(middleName);
         this.lastName = emptyStringIfNull(lastName);
     }
 
-    public void setSpanishName(String primerNombre, String segundoNombre,
-                               String primerApellido, String segundoApellido) {
+    void setSpanishName(String primerNombre, String segundoNombre,
+                        String primerApellido, String segundoApellido) {
         this.firstName = emptyStringIfNull(primerNombre);
         this.middleName = emptyStringIfNull(segundoNombre);
         if (primerApellido != null) {
@@ -84,7 +84,7 @@ public class JobApplicant {
         }
     }
 
-    public String formatLastNameFirst() {
+    String formatLastNameFirst() {
         StringBuilder sb = new StringBuilder(lastName);
         sb.append(", ");
         sb.append(firstName);
@@ -95,15 +95,11 @@ public class JobApplicant {
         return sb.toString();
     }
 
-    public boolean validateName() {
-        if (firstName.length() > 0 && lastName.length() > 0) {
-            return true;
-        }
-
-        return false;
+    boolean validateName() {
+        return firstName.length() > 0 && lastName.length() > 0;
     }
 
-    public void setSsn(String ssn) {
+    void setSsn(String ssn) {
         if (ssn.matches("(\\d{3}-\\d{2}-\\d{4}|\\d{9})")) {
             this.ssn = ssn.replaceAll("-", "");
         } else {
@@ -111,8 +107,8 @@ public class JobApplicant {
         }
     }
 
-    public String formatSsn() {
         StringBuilder sb = new StringBuilder(ssn.substring(0, 3));
+    String formatSsn() {
         sb.append("-");
         sb.append(ssn.substring(3, 5));
         sb.append("-");
@@ -120,7 +116,7 @@ public class JobApplicant {
         return sb.toString();
     }
 
-    public int validateSsn() {
+    int validateSsn() {
         if (!ssn.matches("\\d{9}")) {
             return 1;
         }
@@ -140,18 +136,18 @@ public class JobApplicant {
         return 0;
     }
 
-    public void setZipCode(String zipCode) throws URISyntaxException, IOException {
+    void setZipCode(String zipCode) throws URISyntaxException, IOException {
         this.zipCode = zipCode;
         CityState result = this.zipCodeSearch.find(this.zipCode);
         this.city = result.getCity();
         this.state = result.getState();
     }
 
-    public String getCity() {
+    String getCity() {
         return city;
     }
 
-    public String getState() {
+    String getState() {
         return state;
     }
 
