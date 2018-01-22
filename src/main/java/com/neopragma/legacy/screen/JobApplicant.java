@@ -24,15 +24,54 @@ public class JobApplicant {
     private String firstName = null;
     private String middleName = null;
     private String lastName = null;
+    private String ssn;
+    private String city;
+    private String state;
+    private String zipCode;
+
+    private String[] specialCases = new String[] {
+            "219099999",
+            "078051120"
+    };
+
+    public static void main(String[] args) throws URISyntaxException, IOException {
+        JobApplicant jobApplicant = new JobApplicant();
+        boolean done = false;
+        Scanner scanner = new Scanner(System.in);
+        String firstName = "";
+        String middleName = "";
+        String lastName = "";
+        String ssn = "";
+        String zipCode = "";
+        while (!done) {
+            System.out.println("Please enter info about a job candidate or 'quit' to quit");
+            System.out.println("First name?");
+            firstName = scanner.nextLine();
+            if (firstName.equals("quit")) {
+                scanner.close();
+                System.out.println("Bye-bye!");
+                done = true;
+                break;
+            }
+            System.out.println("Middle name?");
+            middleName = scanner.nextLine();
+            System.out.println("Last name?");
+            lastName = scanner.nextLine();
+            System.out.println("SSN?");
+            ssn = scanner.nextLine();
+            System.out.println("Zip Code?");
+            zipCode = scanner.nextLine();
+            jobApplicant.setName(firstName, middleName, lastName);
+            jobApplicant.setSsn(ssn);
+            jobApplicant.setZipCode(zipCode);
+            jobApplicant.save();
+        }
+    }
 
     public void setName(String firstName, String middleName, String lastName) {
         this.firstName = emptyStringIfNull(firstName);
         this.middleName = emptyStringIfNull(middleName);
         this.lastName = emptyStringIfNull(lastName);
-    }
-
-    private String emptyStringIfNull(String string) {
-        return string == null ? "" : string;
     }
 
     public void setSpanishName(String primerNombre, String segundoNombre,
@@ -66,16 +105,6 @@ public class JobApplicant {
 
         return false;
     }
-
-    private String ssn;
-
-    private String[] specialCases = new String[]{
-            "219099999", "078051120"
-    };
-
-    private String zipCode;
-    private String city;
-    private String state;
 
     public void setSsn(String ssn) {
         if (ssn.matches("(\\d{3}-\\d{2}-\\d{4}|\\d{9})")) {
@@ -186,38 +215,7 @@ public class JobApplicant {
         System.out.println("Saving to database: " + formatLastNameFirst());
     }
 
-    public static void main(String[] args) throws URISyntaxException, IOException {
-        JobApplicant jobApplicant = new JobApplicant();
-        boolean done = false;
-        Scanner scanner = new Scanner(System.in);
-        String firstName = "";
-        String middleName = "";
-        String lastName = "";
-        String ssn = "";
-        String zipCode = "";
-        while (!done) {
-            System.out.println("Please enter info about a job candidate or 'quit' to quit");
-            System.out.println("First name?");
-            firstName = scanner.nextLine();
-            if (firstName.equals("quit")) {
-                scanner.close();
-                System.out.println("Bye-bye!");
-                done = true;
-                break;
-            }
-            System.out.println("Middle name?");
-            middleName = scanner.nextLine();
-            System.out.println("Last name?");
-            lastName = scanner.nextLine();
-            System.out.println("SSN?");
-            ssn = scanner.nextLine();
-            System.out.println("Zip Code?");
-            zipCode = scanner.nextLine();
-            jobApplicant.setName(firstName, middleName, lastName);
-            jobApplicant.setSsn(ssn);
-            jobApplicant.setZipCode(zipCode);
-            jobApplicant.save();
-        }
+    private String emptyStringIfNull(String string) {
+        return string == null ? "" : string;
     }
-
 }
