@@ -199,17 +199,6 @@ public class JobApplicant {
         return state;
     }
 
-    public void add(String firstName,
-                    String middleName,
-                    String lastName,
-                    String ssn,
-                    String zipCode) throws URISyntaxException, IOException {
-        setName(firstName, middleName, lastName);
-        setSsn(ssn);
-        setZipCode(zipCode);
-        save();
-    }
-
     private void save() {
         //TODO save information to a database
         System.out.println("Saving to database: " + formatLastNameFirst());
