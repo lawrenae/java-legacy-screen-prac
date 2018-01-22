@@ -3,6 +3,8 @@ package com.neopragma.legacy.screen;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
@@ -10,7 +12,6 @@ import java.net.URISyntaxException;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.neopragma.legacy.screen.JobApplicant;
 
 /**
  * Automated unit checks for the base version of the JobApplicant application.
@@ -162,19 +163,14 @@ public class JobApplicantTest {
 		jobApplicant.setSsn("219099999");
 		assertEquals(4, jobApplicant.validateSsn());
 	}
-	
+
 	@Test
 	public void itFindsAddisonTexasBy5DigitZipCode() throws URISyntaxException, IOException {
+		ZipCodeSearch findCityState = mock(ZipCodeSearch.class);
+		when(findCityState.find("75001")).thenReturn(new CityState("Addison", "TX"));
+		jobApplicant = new JobApplicant(findCityState);
 		jobApplicant.setZipCode("75001");
 		assertEquals("Addison", jobApplicant.getCity());
 		assertEquals("TX", jobApplicant.getState());
 	}
-	
-	@Test
-	public void itFindsMaranaArizonaBy9DigitZipCode() throws URISyntaxException, IOException {
-		jobApplicant.setZipCode("856585578");
-		assertEquals("Marana", jobApplicant.getCity());
-		assertEquals("AZ", jobApplicant.getState());
-	}
-
 }
