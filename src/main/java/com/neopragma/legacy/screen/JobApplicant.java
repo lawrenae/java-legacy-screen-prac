@@ -42,9 +42,7 @@ public class JobApplicant {
         this.firstName = emptyStringIfNull(primerNombre);
         this.middleName = emptyStringIfNull(segundoNombre);
         if (primerApellido != null) {
-            StringBuilder sb = new StringBuilder(primerApellido);
-            sb.append(segundoApellido == null ? null : " " + segundoApellido);
-            this.lastName = sb.toString();
+            this.lastName = primerApellido + (segundoApellido == null ? null : " " + segundoApellido);
         } else {
             this.lastName = "";
         }
@@ -89,8 +87,8 @@ public class JobApplicant {
         }
 
         if ("000".equals(ssn.substring(0, 3)) ||
-                "666".equals(ssn.substring(0, 3)) ||
-                "9".equals(ssn.substring(0, 1))) {
+            "666".equals(ssn.substring(0, 3)) ||
+            "9".equals(ssn.substring(0, 1))) {
             return false;
         }
 
